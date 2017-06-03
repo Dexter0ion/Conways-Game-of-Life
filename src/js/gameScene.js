@@ -8,12 +8,18 @@ const WIDTH = 720, HEIGHT = 480, GRID = 20;
 const columns = WIDTH / GRID;
 const rows = HEIGHT / GRID;
 
-let board, cnv;
-let fr = 30;
-
+let board, cnv, slider, sliderLabel;
 // 游戏可视化部分
 export function setup () {
     cnv = createCanvas(WIDTH, HEIGHT);
+
+    slider = createSlider(1, 60, 30, 1);
+    sliderLabel = createP('frame rate 0 fps');
+    sliderLabel.position(50, 600);
+    sliderLabel.style("margin-top", "-2px");
+    slider.position(200, 600);
+    slider.style('width', '80px');
+
     centerCanvas();
 
     board = new Array(rows);
@@ -43,13 +49,9 @@ export function draw () {
         }
     }
     board = getNextState(board);
-    if (fr > 0) {
-        frameRate(fr);
-        fr -= 0.5;
-    }
-    if (fr <= 0) {
-        fr = 30;
-    }
+    const fr = slider.value();
+    frameRate(fr);
+    sliderLabel.html(`frame rate: ${paused ? 0 : fr} fps`);
 }
 
 // 随机生成一个初始状态
