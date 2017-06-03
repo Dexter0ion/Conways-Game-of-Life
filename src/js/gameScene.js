@@ -8,9 +8,7 @@ const WIDTH = 720, HEIGHT = 480, GRID = 20;
 const columns = WIDTH / GRID;
 const rows = HEIGHT / GRID;
 
-let board, cnv, slider, sliderLabel;
-
-let cnvMarginLeft, cnvMarginTop;
+let board, cnv, slider, sliderLabel, clearBtn, randomBtn;
 
 // 游戏可视化部分
 export function setup () {
@@ -18,6 +16,8 @@ export function setup () {
 
     centerCanvas();
     createFrameRateController();
+    createClearBtn();
+    createRandomBtn();
 
     board = new Array(rows);
     for (let row = 0; row < rows; ++row) {
@@ -29,8 +29,8 @@ export function setup () {
 }
 
 function centerCanvas () {
-    cnvMarginLeft = (windowWidth - width) / 2;
-    cnvMarginTop = (windowHeight - height) / 2;
+    const cnvMarginLeft = (windowWidth - width) / 2;
+    const cnvMarginTop = (windowHeight - height) / 2;
     cnv.position(cnvMarginLeft, cnvMarginTop);
 }
 
@@ -43,11 +43,40 @@ function createFrameRateController () {
     slider.style('width', '80px');
 }
 
+function createClearBtn () {
+    clearBtn = createButton('clear');
+    clearBtn.position(300, 600);
+    clearBtn.mousePressed(clearScene);
+}
+
+function clearScene () {
+    if (!paused) paused = true;
+    init();
+    redraw();
+}
+
+function createRandomBtn () {
+    randomBtn = createButton('random');
+    randomBtn.position(350, 600);
+    randomBtn.mousePressed(randomScene);
+}
+
+function randomScene () {
+    if (!paused) paused = true;
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < columns; j++) {
+            // 随机1或者0
+            board[i][j] = floor(random(2));
+        }
+    }
+    redraw();
+}
+
 export function draw () {
     // 背景为白色
     background(255);
-    for (var i = 0; i < rows; i++) {
-        for (var j = 0; j < columns; j++) {
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < columns; j++) {
             if ((board[i][j] == 1)) fill(0);
             else fill(255);
             stroke(0);
@@ -64,10 +93,10 @@ export function draw () {
 
 // 随机生成一个初始状态
 function init () {
-    for (var i = 0; i < rows; i++) {
-        for (var j = 0; j < columns; j++) {
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < columns; j++) {
             // 随机1或者0
-            board[i][j] = floor(random(2));
+            board[i][j] = 0;
         }
     }
 }
