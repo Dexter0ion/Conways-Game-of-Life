@@ -4,7 +4,7 @@
   "description": "TDD Kata in Javascript",
   "main": "index.js",
   "scripts": {
-    "report": "./node_modules/.bin/mocha --compilers js:babel-core/register --reporter mochawesome"
+    "report": "./node_modules/.bin/mocha --compilers js:babel-core/register --reporter mochawesome",
     "prebuild": "rm -rf dist",
     "build": "webpack",
     "test": "./node_modules/.bin/mocha --compilers=.:babel-register --reporter mochawesome",
