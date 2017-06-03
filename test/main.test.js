@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { getNextState } from '../src/main'
 
-describe('Test function: countAlive', () => {
+describe('Test function: getNextState', () => {
     const mockOneNeighbourZero = [
         [0, 0, 0],
         [0, 1, 0],

@@ -1,5 +1,11 @@
 import { expect } from 'chai';
-import  { countAlive, getNextStateWhenAlive, getNextStateWhenDead, extendGrids } from '../src/js/gameLogic';
+import  {
+    countAlive,
+    getNextStateWhenAlive,
+    getNextStateWhenDead,
+    extendGrids,
+    getNextStateByExtendedGrids
+} from '../src/js/gameLogic';
 
 describe('Test function: countAlive', () => {
     const mockOneNeighbourZero = [
@@ -119,3 +125,84 @@ describe('Test function: extendGrids', () => {
     });
 });
 
+
+describe('Test function: getNextStateByExtendedGrids', () => {
+    const mockOneNeighbourZero = [
+        [0, 0, 0],
+        [0, 1, 0],
+        [0, 0, 0]
+    ];
+    const nextMockOneNeighbourZero = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ];
+    const mockOneNeighbourTwo = [
+        [0, 1, 0],
+        [0, 1, 1],
+        [0, 0, 0]
+    ];
+    const nextMockOneNeighbourTwo = [
+        [0, 1, 1],
+        [0, 1, 1],
+        [0, 0, 0]
+    ];
+    const mockOneNeighbourThree = [
+        [0, 1, 0],
+        [0, 1, 0],
+        [1, 0, 1]
+    ];
+    const nextMockOneNeighbourThree = [
+        [0, 0, 0],
+        [1, 1, 1],
+        [0, 1, 0]
+    ];
+    const mockOneNeighbourFour = [
+        [1, 0, 0],
+        [1, 1, 0],
+        [1, 1, 0]
+    ];
+    const nextMockOneNeighbourFour = [
+        [1, 1, 0],
+        [0, 0, 0],
+        [1, 1, 0]
+    ];
+    const mockZeroNeighbourThree = [
+        [0, 0, 0],
+        [1, 0, 0],
+        [1, 1, 0]
+    ];
+    const nextMockZeroNeighbourThree = [
+        [0, 0, 0],
+        [1, 1, 0],
+        [1, 1, 0]
+    ];
+    const mockZeroNeighbourFour = [
+        [1, 0, 0],
+        [1, 0, 0],
+        [1, 1, 0]
+    ];
+    const nextMockZeroNeighbourFour = [
+        [0, 0, 0],
+        [1, 0, 0],
+        [1, 1, 0]
+    ];
+    it('should return nextMockOneNeighbourZero of mockOneNeighbourZero', () => {
+        expect(getNextStateByExtendedGrids(extendGrids(mockOneNeighbourZero))).eql(nextMockOneNeighbourZero);
+    });
+    it('should return nextMockOneNeighbourTwo of mockOneNeighbourTwo', () => {
+        expect(getNextStateByExtendedGrids(extendGrids(mockOneNeighbourTwo))).eql(nextMockOneNeighbourTwo);
+    });
+    it('should return nextMockOneNeighbourThree of mockOneNeighbourThree', () => {
+        expect(getNextStateByExtendedGrids(extendGrids(mockOneNeighbourThree))).eql(nextMockOneNeighbourThree);
+    });
+    it('should return nextMockOneNeighbourFour of mockOneNeighbourFour', () => {
+        expect(getNextStateByExtendedGrids(extendGrids(mockOneNeighbourFour))).eql(nextMockOneNeighbourFour);
+    });
+    it('should return nextMockZeroNeighbourThree of mockZeroNeighbourThree', () => {
+        expect(getNextStateByExtendedGrids(extendGrids(mockZeroNeighbourThree))).eql(nextMockZeroNeighbourThree);
+    });
+    it('should return nextMockZeroNeighbourFour of mockZeroNeighbourFour', () => {
+        expect(getNextStateByExtendedGrids(extendGrids(mockZeroNeighbourFour))).eql(nextMockZeroNeighbourFour);
+    });
+});

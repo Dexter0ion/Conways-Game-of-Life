@@ -55,3 +55,35 @@ export function extendGrids (grids) {
     extendedGrids = [new Array(cols + 2).fill(0), ...extendedGrids, new Array(cols + 2).fill(0)];
     return extendedGrids;
 }
+
+/**
+ * 根据扩展后的场景，计算下一状态
+ * @param extendedGrids 扩展后的场景
+ * @returns {Array} 下一状态
+ */
+export function getNextStateByExtendedGrids (extendedGrids) {
+    if (extendedGrids.length === 0) return;
+
+    // 场景的实际大小
+    const rows = extendedGrids.length - 2;
+    const cols = extendedGrids[0].length - 2;
+
+    // 初始化 下一状态
+    let retArr = new Array(rows);
+    for (let row = 0; row < rows; ++row) {
+        retArr[row] = new Array(cols);
+    }
+
+    // 计算 下一个状态
+    for (let i = 1; i <= rows; ++i) {
+        for (let j = 1; j <= cols; ++j) {
+            const aliveNums = countAlive([i, j], extendedGrids);
+            if (extendedGrids[i][j] === 1) {
+                retArr[i - 1][j - 1] = getNextStateWhenAlive(aliveNums);
+            } else {
+                retArr[i - 1][j - 1] = getNextStateWhenDead(aliveNums);
+            }
+        }
+    }
+    return retArr;
+}
