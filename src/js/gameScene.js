@@ -8,16 +8,19 @@ const WIDTH = 720, HEIGHT = 480, GRID = 20;
 const columns = WIDTH / GRID;
 const rows = HEIGHT / GRID;
 
-let board, cnv, slider, sliderLabel, clearBtn, randomBtn;
+let board, cnv, slider, sliderLabel, clearBtn, randomBtn, gameInstruction, statusLabel, bottomDiv;
 
 // 游戏可视化部分
 export function setup () {
     cnv = createCanvas(WIDTH, HEIGHT);
 
     centerCanvas();
+    createBottomDiv();
     createFrameRateController();
     createClearBtn();
     createRandomBtn();
+    createGameInstruction();
+    createStatusLabel();
 
     board = new Array(rows);
     for (let row = 0; row < rows; ++row) {
@@ -34,19 +37,36 @@ function centerCanvas () {
     cnv.position(cnvMarginLeft, cnvMarginTop);
 }
 
+function createBottomDiv () {
+    bottomDiv = createDiv('');
+    bottomDiv.class('bottom');
+}
+
+function createGameInstruction () {
+    gameInstruction = createP('黑色格子为存活细胞，白色格子为死亡细胞。点击空格键，开始游戏，再次点击，暂停游戏。点击clear键，清空场景。点击random键，随机生成场景。点击场景中的格子，对细胞进行死亡存活的反转。');
+    gameInstruction.class('game-instruction');
+}
+
+function createStatusLabel () {
+    statusLabel = createP('PAUSED');
+    statusLabel.class('status-label')
+}
+
+
 function createFrameRateController () {
     slider = createSlider(1, 60, 30, 1);
     sliderLabel = createP('frame rate 0 fps');
-    sliderLabel.position(50, 600);
-    sliderLabel.style("margin-top", "-2px");
-    slider.position(200, 600);
-    slider.style('width', '80px');
+    slider.class('slider');
+    sliderLabel.class('slider-label');
+    sliderLabel.parent(bottomDiv);
+    slider.parent(bottomDiv);
 }
 
 function createClearBtn () {
     clearBtn = createButton('clear');
-    clearBtn.position(300, 600);
     clearBtn.mousePressed(clearScene);
+    clearBtn.class('clear-btn');
+    clearBtn.parent(bottomDiv);
 }
 
 function clearScene () {
@@ -57,8 +77,9 @@ function clearScene () {
 
 function createRandomBtn () {
     randomBtn = createButton('random');
-    randomBtn.position(350, 600);
     randomBtn.mousePressed(randomScene);
+    randomBtn.class('random-btn');
+    randomBtn.parent(bottomDiv);
 }
 
 function randomScene () {
@@ -85,7 +106,13 @@ export function draw () {
     }
     if (!paused) {
         board = getNextState(board);
+        statusLabel.html('Running');
+        statusLabel.class('status-label running');
+    } else {
+        statusLabel.html('Paused');
+        statusLabel.class('status-label paused');
     }
+
     const fr = slider.value();
     frameRate(fr);
     sliderLabel.html(`frame rate: ${paused ? 0 : fr} fps`);

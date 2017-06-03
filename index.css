@@ -1,0 +1,43 @@
+.bottom {
+    position: absolute;
+    top: 620px;
+    left: 50%;
+    width: 500px;
+    transform: translateX(-50%);
+}
+
+.bottom .slider-label {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.random-btn, .clear-btn {
+    margin: 0 10px;
+}
+
+.clear-btn {
+    margin-left: 20px;
+}
+
+.game-instruction {
+    text-align: center;
+    margin: auto;
+    position: relative;
+    top: -13px;
+}
+
+.status-label {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+}
+
+.status-label.paused {
+    color: red;
+}
+
+.status-label.running {
+    color: green;
+}

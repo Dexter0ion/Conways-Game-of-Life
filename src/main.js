@@ -1,4 +1,5 @@
 import { setup, draw, keyPressed, mouseClicked } from './js/gameScene';
+import '../index.css';
 
 if (window) {
     window.setup = setup;
