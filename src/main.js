@@ -1,11 +1,7 @@
-import { getNextStateByExtendedGrids, extendGrids } from './js/gameLogic'
+import { setup, draw } from './js/gameScene';
 
-export function getNextState (grids) {
-    // 扩展场景
-    const extendedGrids = extendGrids(grids);
-
-    // 获取下一状态
-    const retArr = getNextStateByExtendedGrids(extendedGrids);
-
-    return retArr;
+if (window) {
+    window.setup = setup;
+    window.draw = draw;
 }
+

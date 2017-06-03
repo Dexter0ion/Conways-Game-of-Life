@@ -1,3 +1,5 @@
+// 游戏逻辑部分
+
 /**
  * 输入目标点坐标及整个场景，返回目标周围状态为存活的细胞数量
  * @param indexArr 目标点坐标
@@ -85,5 +87,20 @@ export function getNextStateByExtendedGrids (extendedGrids) {
             }
         }
     }
+    return retArr;
+}
+
+/**
+ * 游戏逻辑部分主函数
+ * @param grids
+ * @returns {Array}
+ */
+export function getNextState (grids) {
+    // 扩展场景
+    const extendedGrids = extendGrids(grids);
+
+    // 获取下一状态
+    const retArr = getNextStateByExtendedGrids(extendedGrids);
+
     return retArr;
 }

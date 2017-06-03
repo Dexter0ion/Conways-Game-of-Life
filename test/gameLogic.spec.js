@@ -4,7 +4,7 @@ import  {
     getNextStateWhenAlive,
     getNextStateWhenDead,
     extendGrids,
-    getNextStateByExtendedGrids
+    getNextState
 } from '../src/js/gameLogic';
 
 describe('Test function: countAlive', () => {
@@ -125,8 +125,7 @@ describe('Test function: extendGrids', () => {
     });
 });
 
-
-describe('Test function: getNextStateByExtendedGrids', () => {
+describe('Test function: getNextState', () => {
     const mockOneNeighbourZero = [
         [0, 0, 0],
         [0, 1, 0],
@@ -188,21 +187,21 @@ describe('Test function: getNextStateByExtendedGrids', () => {
         [1, 1, 0]
     ];
     it('should return nextMockOneNeighbourZero of mockOneNeighbourZero', () => {
-        expect(getNextStateByExtendedGrids(extendGrids(mockOneNeighbourZero))).eql(nextMockOneNeighbourZero);
+        expect(getNextState(mockOneNeighbourZero)).eql(nextMockOneNeighbourZero);
     });
     it('should return nextMockOneNeighbourTwo of mockOneNeighbourTwo', () => {
-        expect(getNextStateByExtendedGrids(extendGrids(mockOneNeighbourTwo))).eql(nextMockOneNeighbourTwo);
+        expect(getNextState(mockOneNeighbourTwo)).eql(nextMockOneNeighbourTwo);
     });
     it('should return nextMockOneNeighbourThree of mockOneNeighbourThree', () => {
-        expect(getNextStateByExtendedGrids(extendGrids(mockOneNeighbourThree))).eql(nextMockOneNeighbourThree);
+        expect(getNextState(mockOneNeighbourThree)).eql(nextMockOneNeighbourThree);
     });
     it('should return nextMockOneNeighbourFour of mockOneNeighbourFour', () => {
-        expect(getNextStateByExtendedGrids(extendGrids(mockOneNeighbourFour))).eql(nextMockOneNeighbourFour);
+        expect(getNextState(mockOneNeighbourFour)).eql(nextMockOneNeighbourFour);
     });
     it('should return nextMockZeroNeighbourThree of mockZeroNeighbourThree', () => {
-        expect(getNextStateByExtendedGrids(extendGrids(mockZeroNeighbourThree))).eql(nextMockZeroNeighbourThree);
+        expect(getNextState(mockZeroNeighbourThree)).eql(nextMockZeroNeighbourThree);
     });
     it('should return nextMockZeroNeighbourFour of mockZeroNeighbourFour', () => {
-        expect(getNextStateByExtendedGrids(extendGrids(mockZeroNeighbourFour))).eql(nextMockZeroNeighbourFour);
+        expect(getNextState(mockZeroNeighbourFour)).eql(nextMockZeroNeighbourFour);
     });
 });
