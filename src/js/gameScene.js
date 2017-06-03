@@ -1,4 +1,5 @@
 import 'p5';
+import 'p5/lib/addons/p5.dom';
 import { getNextState } from './gameLogic'
 
 const WIDTH = 720, HEIGHT = 480, GRID = 20;
@@ -7,12 +8,13 @@ const WIDTH = 720, HEIGHT = 480, GRID = 20;
 const columns = WIDTH / GRID;
 const rows = HEIGHT / GRID;
 
-let board;
+let board, cnv;
 let fr = 30;
 
 // 游戏可视化部分
 export function setup () {
-    createCanvas(WIDTH, HEIGHT);
+    cnv = createCanvas(WIDTH, HEIGHT);
+    centerCanvas();
 
     board = new Array(rows);
     for (let row = 0; row < rows; ++row) {
@@ -21,6 +23,12 @@ export function setup () {
 
     init();
     noLoop();
+}
+
+function centerCanvas () {
+    const x = (windowWidth - width) / 2;
+    const y = (windowHeight - height) / 2;
+    cnv.position(x, y);
 }
 
 export function draw () {
@@ -35,13 +43,13 @@ export function draw () {
         }
     }
     board = getNextState(board);
-    // if (fr > 0) {
-    //     frameRate(fr);
-    //     fr -= 0.5;
-    // }
-    // if (fr <= 0) {
-    //     fr = 30;
-    // }
+    if (fr > 0) {
+        frameRate(fr);
+        fr -= 0.5;
+    }
+    if (fr <= 0) {
+        fr = 30;
+    }
 }
 
 // 随机生成一个初始状态
