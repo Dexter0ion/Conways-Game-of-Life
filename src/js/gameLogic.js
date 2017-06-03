@@ -36,3 +36,22 @@ export function getNextStateWhenAlive (aliveNeighbours) {
 export function getNextStateWhenDead (aliveNeighbours) {
     return aliveNeighbours === 3 ? 1 : 0;
 }
+
+/**
+ * 扩展场景,使用一圈死亡细胞将场景包围，方便countAlive计算（数组下标不合法）。
+ * @param grids
+ * @returns {Array}
+ */
+export function extendGrids (grids) {
+    if (grids.length === 0) return;
+    const rows = grids.length;
+    const cols = grids[0].length;
+
+    // 扩展场景
+    let extendedGrids = new Array(rows);
+    for (let i = 0; i < rows; ++i) {
+        extendedGrids[i] = [0, ...grids[i], 0];
+    }
+    extendedGrids = [new Array(cols + 2).fill(0), ...extendedGrids, new Array(cols + 2).fill(0)];
+    return extendedGrids;
+}

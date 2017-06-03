@@ -1,4 +1,4 @@
-import { countAlive, getNextStateWhenAlive, getNextStateWhenDead } from './js/gameLogic'
+import { countAlive, getNextStateWhenAlive, getNextStateWhenDead, extendGrids } from './js/gameLogic'
 
 export function getNextState (grids) {
     if (grids.length === 0) return;
@@ -12,11 +12,7 @@ export function getNextState (grids) {
     }
 
     // 扩展场景
-    let extendedGrids = new Array(rows);
-    for (let i = 0; i < rows; ++i) {
-        extendedGrids[i] = [0, ...grids[i], 0];
-    }
-    extendedGrids = [new Array(cols + 2, 0), ...extendedGrids, new Array(cols + 2, 0)];
+    const extendedGrids = extendGrids(grids);
 
     // 判断 储存下一个状态
     for (let i = 1; i <= rows; ++i) {

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import  { countAlive, getNextStateWhenAlive, getNextStateWhenDead } from '../src/js/gameLogic';
+import  { countAlive, getNextStateWhenAlive, getNextStateWhenDead, extendGrids } from '../src/js/gameLogic';
 
 describe('Test function: countAlive', () => {
     const mockOneNeighbourZero = [
@@ -98,6 +98,24 @@ describe('Test function: getNextStateWhenDead', () => {
 
     it('should return number 0(dead) when with 4 alive neighbours', () => {
         expect(getNextStateWhenDead(4)).equal(0);
+    });
+});
+
+describe('Test function: extendGrids', () => {
+    const inputArr = [
+        [1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]
+    ];
+    const outputArr = [
+        [0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0],
+        [0, 1, 1, 1, 0],
+        [0, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0]
+    ];
+    it('should return 5*5 grids when input 3*3 grids', () => {
+        expect(extendGrids(inputArr)).eql(outputArr);
     });
 });
 
