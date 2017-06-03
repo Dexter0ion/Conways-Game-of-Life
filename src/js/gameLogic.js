@@ -16,3 +16,11 @@ export function countAlive (indexArr, grids) {
     countAlive -= grids[indexArr[0]][indexArr[1]];
     return countAlive;
 }
+
+export function getNextStateWhenAlive(){
+
+}
+
+export function getNextStateWhenDead(){
+
+}

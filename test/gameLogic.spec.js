@@ -1,59 +1,103 @@
 import { expect } from 'chai';
-import  { countAlive } from '../src/js/gameLogic';
+import  { countAlive, getNextStateWhenAlive, getNextStateWhenDead } from '../src/js/gameLogic';
 
-const mockOneNeightborZero = [
-    [0, 0, 0],
-    [0, 1, 0],
-    [0, 0, 0]
-];
-const mockOneNeightborTwo = [
-    [0, 1, 0],
-    [0, 1, 1],
-    [0, 0, 0]
-];
-const mockOneNeightborThree = [
-    [0, 1, 0],
-    [0, 1, 0],
-    [1, 0, 1]
-];
-const mockOneNeightborFour = [
-    [1, 0, 0],
-    [1, 1, 0],
-    [1, 1, 0]
-];
-const mockZeroNeightborThree = [
-    [0, 0, 0],
-    [1, 0, 0],
-    [1, 1, 0]
-];
-const mockZeroNeightborFour = [
-    [1, 0, 0],
-    [1, 0, 0],
-    [1, 1, 0]
-];
-
-describe('Test game logic', () => {
-    it('should return number 0 of mockOneNeightborZero', () => {
-        expect(countAlive([1, 1], mockOneNeightborZero)).equal(0);
+describe('Test function: countAlive', () => {
+    const mockOneNeighbourZero = [
+        [0, 0, 0],
+        [0, 1, 0],
+        [0, 0, 0]
+    ];
+    const mockOneNeighbourTwo = [
+        [0, 1, 0],
+        [0, 1, 1],
+        [0, 0, 0]
+    ];
+    const mockOneNeighbourThree = [
+        [0, 1, 0],
+        [0, 1, 0],
+        [1, 0, 1]
+    ];
+    const mockOneNeighbourFour = [
+        [1, 0, 0],
+        [1, 1, 0],
+        [1, 1, 0]
+    ];
+    const mockZeroNeighbourThree = [
+        [0, 0, 0],
+        [1, 0, 0],
+        [1, 1, 0]
+    ];
+    const mockZeroNeighbourFour = [
+        [1, 0, 0],
+        [1, 0, 0],
+        [1, 1, 0]
+    ];
+    it('should return number 0 of mockOneNeighbourZero', () => {
+        expect(countAlive([1, 1], mockOneNeighbourZero)).equal(0);
     });
 
-    it('should return number 2 of mockOneNeightborTwo', () => {
-        expect(countAlive([1, 1], mockOneNeightborTwo)).equal(2);
+    it('should return number 2 of mockOneNeighbourTwo', () => {
+        expect(countAlive([1, 1], mockOneNeighbourTwo)).equal(2);
     });
 
-    it('should return number 3 of mockOneNeightborThree', () => {
-        expect(countAlive([1, 1], mockOneNeightborThree)).equal(3);
+    it('should return number 3 of mockOneNeighbourThree', () => {
+        expect(countAlive([1, 1], mockOneNeighbourThree)).equal(3);
     });
 
-    it('should return number 4 of mockOneNeightborFour', () => {
-        expect(countAlive([1, 1], mockOneNeightborFour)).equal(4);
+    it('should return number 4 of mockOneNeighbourFour', () => {
+        expect(countAlive([1, 1], mockOneNeighbourFour)).equal(4);
     });
 
-    it('should return number 3 of mockZeroNeightborThree', () => {
-        expect(countAlive([1, 1], mockZeroNeightborThree)).equal(3);
+    it('should return number 3 of mockZeroNeighbourThree', () => {
+        expect(countAlive([1, 1], mockZeroNeighbourThree)).equal(3);
     });
 
-    it('should return number 3 of mockZeroNeightborFour', () => {
-        expect(countAlive([1, 1], mockZeroNeightborFour)).equal(4);
+    it('should return number 3 of mockZeroNeighbourFour', () => {
+        expect(countAlive([1, 1], mockZeroNeighbourFour)).equal(4);
     });
 });
+
+describe('Test function: getNextStateWhenAlive', () => {
+    it('should return number 0(dead) when with 0 alive neighbours', () => {
+        expect(getNextStateWhenAlive(0)).equal(0);
+    });
+
+    it('should return number 0(dead) when with 1 alive neighbours', () => {
+        expect(getNextStateWhenAlive(1)).equal(0);
+    });
+
+    it('should return number 1(alive) when with 2 alive neighbours', () => {
+        expect(getNextStateWhenAlive(2)).equal(1);
+    });
+
+    it('should return number 1(alive) when with 3 alive neighbours', () => {
+        expect(getNextStateWhenAlive(3)).equal(1);
+    });
+
+    it('should return number 0(dead) when with 4 alive neighbours', () => {
+        expect(getNextStateWhenAlive(4)).equal(0);
+    });
+});
+
+describe('Test function: getNextStateWhenDead', () => {
+    it('should return number 0(dead) when with 0 alive neighbours', () => {
+        expect(getNextStateWhenDead(0)).equal(0);
+    });
+
+    it('should return number 0(dead) when with 1 alive neighbours', () => {
+        expect(getNextStateWhenDead(1)).equal(0);
+    });
+
+    it('should return number 0(dead) when with 2 alive neighbours', () => {
+        expect(getNextStateWhenDead(2)).equal(0);
+    });
+
+    it('should return number 1(alive) when with 3 alive neighbours', () => {
+        expect(getNextStateWhenDead(3)).equal(1);
+    });
+
+    it('should return number 0(dead) when with 4 alive neighbours', () => {
+        expect(getNextStateWhenDead(4)).equal(0);
+    });
+});
+
