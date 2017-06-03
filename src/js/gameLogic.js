@@ -25,15 +25,7 @@ export function countAlive (indexArr, grids) {
  * @returns {number}
  */
 export function getNextStateWhenAlive (aliveNeighbours) {
-    let nextState = 0;
-    if (aliveNeighbours < 2) {
-        nextState = 0;
-    } else if (aliveNeighbours === 2 || aliveNeighbours === 3) {
-        nextState = 1;
-    } else {
-        nextState = 0;
-    }
-    return nextState;
+    return (aliveNeighbours === 2 || aliveNeighbours === 3) ? 1 : 0;
 }
 
 /**
