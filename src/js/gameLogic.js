@@ -17,10 +17,30 @@ export function countAlive (indexArr, grids) {
     return countAlive;
 }
 
-export function getNextStateWhenAlive(){
-
+/**
+ *  当前细胞为存活状态时，当周围低于2个（不包含2个）存活细胞时， 该细胞变成死亡状态。（模拟生命数量稀少）
+ *  当前细胞为存活状态时，当周围有2个或3个存活细胞时， 该细胞保持原样。
+ *  当前细胞为存活状态时，当周围有3个以上的存活细胞时，该细胞变成死亡状态。（模拟生命数量过多）
+ * @param aliveNeighbours
+ * @returns {number}
+ */
+export function getNextStateWhenAlive (aliveNeighbours) {
+    let nextState = 0;
+    if (aliveNeighbours < 2) {
+        nextState = 0;
+    } else if (aliveNeighbours === 2 || aliveNeighbours === 3) {
+        nextState = 1;
+    } else {
+        nextState = 0;
+    }
+    return nextState;
 }
 
-export function getNextStateWhenDead(){
-
+/**
+ * 当前细胞为死亡状态时，当周围有3个存活细胞时，该细胞变成存活状态。 （模拟繁殖）
+ * @param aliveNeighbours 周围存活细胞
+ * @returns {number}
+ */
+export function getNextStateWhenDead (aliveNeighbours) {
+    return aliveNeighbours === 3 ? 1 : 0;
 }
