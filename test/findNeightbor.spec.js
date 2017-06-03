@@ -2,34 +2,34 @@ import { expect } from 'chai';
 import  { countAlive } from '../src/js/gameLogic';
 
 const mockOneNeightborZero = [
-    0, 0, 0,
-    0, 1, 0,
-    0, 0, 0
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0]
 ];
 const mockOneNeightborTwo = [
-    0, 1, 0,
-    0, 1, 1,
-    0, 0, 0
+    [0, 1, 0],
+    [0, 1, 1],
+    [0, 0, 0]
 ];
 const mockOneNeightborThree = [
-    0, 1, 0,
-    0, 1, 0,
-    1, 0, 1
+    [0, 1, 0],
+    [0, 1, 0],
+    [1, 0, 1]
 ];
 const mockOneNeightborFour = [
-    1, 0, 0,
-    1, 1, 0,
-    1, 1, 0
+    [1, 0, 0],
+    [1, 1, 0],
+    [1, 1, 0]
 ];
 const mockZeroNeightborThree = [
-    0, 0, 0,
-    1, 0, 0,
-    1, 1, 0
+    [0, 0, 0],
+    [1, 0, 0],
+    [1, 1, 0]
 ];
 const mockZeroNeightborFour = [
-    1, 0, 0,
-    1, 0, 0,
-    1, 1, 0
+    [1, 0, 0],
+    [1, 0, 0],
+    [1, 1, 0]
 ];
 
 describe('Test game logic', () => {
